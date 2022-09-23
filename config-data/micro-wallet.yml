@@ -24,6 +24,7 @@ msg:
     registro:
       notfound.all: MONEDEROS NO ENCONTRADOS 
       notfound: MONEDERO NO IDENTIFICADO
+      card.exists: NUMERO DE TARJETA NO EXISTE
       notfound.create: MONEDERO NO SE PUDO CREAR
       if.exists: MONEDERO YA EXISTE
       phoneini.exists: NUMERO DE TELEFONO INICIAL NO EXISTE

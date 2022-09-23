@@ -8,6 +8,13 @@ spring:
     mongodb:
       database: db_client
       uri: mongodb://localhost:27017/client
+  kafka:
+    bootstrap-server: ${kafka.server.hostname}:${kafka.server.port}
+    
+kafka:
+  server:
+    hostname: localhost
+    port: 9092
 
 eureka:
   client:

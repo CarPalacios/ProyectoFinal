@@ -25,7 +25,12 @@ topic:
   name: bootcoin-topic
   partitions: 1
   replicas: 1
-  
+
+msg:
+  error:
+    registro:
+      notfound.all: MONEDEROS NO ENCONTRADOS
+      if.exists: MONEDERO YA REGISTRADO
             
 resilience4j:
   circuitbreaker:
