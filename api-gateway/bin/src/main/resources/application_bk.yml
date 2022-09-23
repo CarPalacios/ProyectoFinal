@@ -1,0 +1,47 @@
+server:
+  port: 8080
+  
+spring:
+  application:
+    name: api-gateway
+
+#routers
+zuul:
+    routes:
+        customer:
+            path: /api/customer-service/**
+            service-id: customer-service
+            url: http://localhost:8090/
+        product:
+            path: /api/product-service/**
+            service-id: product-service
+            url: http://localhost:8091/
+        purchase:
+          path: /api/purchase-service/**
+          service-id: purchase-service
+          url: http://localhost:8092/
+        transaction:
+            path: /api/transaction-service/**
+            service-id: transaction-service
+            url: http://localhost:8093/
+        account:
+            path: /api/account-service/**
+            service-id: account-service
+            url: http://localhost:8094/
+        withdrawal:
+            path: /api/withdrawal-service/**
+            service-id: withdrawal-service
+            url: http://localhost:8095/
+        deposit:
+            path: /api/deposit-service/**
+            service-id: deposit-service
+            url: http://localhost:8096/
+        credit:
+            path: /api/credit-service/**
+            service-id: credit-service
+            url: http://localhost:8097/
+        payment:
+            path: /api/payment-service
+            service-id: payment-service
+            url: http://localhost:8098/
+        

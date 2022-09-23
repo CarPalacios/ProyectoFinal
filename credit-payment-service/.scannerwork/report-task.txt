@@ -1,0 +1,6 @@
+projectKey=MicroPayment
+serverUrl=http://localhost:9000
+serverVersion=8.9.1.44547
+dashboardUrl=http://localhost:9000/dashboard?id=MicroPayment
+ceTaskId=AXqdiQ7vLt0wrnmQJC8s
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXqdiQ7vLt0wrnmQJC8s

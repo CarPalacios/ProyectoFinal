@@ -1,0 +1,58 @@
+server:
+  port: 8099
+    
+spring:
+  application:
+    name: micro-wallet
+  data:
+    mongodb:
+      database: db_wallet
+      uri: mongodb://localhost:27017/wallet
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+      
+topic:
+  name: deposit-topic
+  partitions: 1
+  replicas: 1
+
+msg:
+  error:
+    registro:
+      notfound.all: MONEDEROS NO ENCONTRADOS 
+      notfound: MONEDERO NO IDENTIFICADO
+      notfound.create: MONEDERO NO SE PUDO CREAR
+      if.exists: MONEDERO YA EXISTE
+      phoneini.exists: NUMERO DE TELEFONO INICIAL NO EXISTE
+      phonefin.exists: NUMERO DE TELEFONO FINAL NO EXISTE
+      accountini.exists: NUMERO DE CUENTA INICIAL NO EXISTE
+      accountfin.exists: NUMERO DE CUENTA FINAL NO EXISTE
+      positive: MONTO DEBE SER POSITIVO
+      exceed: MONTO EXCEDE EL SALDO DISPONIBLE      
+      notfound.update: MONEDERO NO IDENTIFICADO PARA ACTUALIZAR
+      notfound.delete: MONEDERO NO IDENTIFICADO PARA ELIMINAR
+      wallet.delete: MONEDERO ELIMINADO
+
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 2s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+        recordExceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.util.concurrent.TimeoutException
+          - java.io.IOException
+          - java.net.ConnectException
+    instances:
+      customerServiceCircuitBreaker:
+        baseConfig: default

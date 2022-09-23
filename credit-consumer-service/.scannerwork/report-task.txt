@@ -1,0 +1,6 @@
+projectKey=MicroCredit
+serverUrl=http://localhost:9000
+serverVersion=8.9.1.44547
+dashboardUrl=http://localhost:9000/dashboard?id=MicroCredit
+ceTaskId=AXqdiPA2Lt0wrnmQJC8r
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXqdiPA2Lt0wrnmQJC8r

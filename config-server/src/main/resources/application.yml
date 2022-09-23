@@ -1,0 +1,10 @@
+server: 
+  port: 8081
+spring: 
+  cloud: 
+    config: 
+      server: 
+        git: 
+          default-label: main
+          searchPaths: config-data
+          uri: "https://github.com/CarPalacios/BootcampProyecto2.git"

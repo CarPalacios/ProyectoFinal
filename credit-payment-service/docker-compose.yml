@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  web:
+    container_name: credit-payment-service
+    restart: always
+    build: .
+    ports:
+       - "8098:8098"

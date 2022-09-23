@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  web:
+    container_name: purchase-service
+    restart: always
+    build: .
+    ports:
+       - "8092:8092"

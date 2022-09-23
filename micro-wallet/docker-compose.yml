@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  web:
+    container_name: micro-wallet
+    restart: always
+    build: .
+    ports:
+       - "8099:8099"

@@ -1,0 +1,6 @@
+projectKey=MicroAccount
+serverUrl=http://localhost:9000
+serverVersion=8.9.1.44547
+dashboardUrl=http://localhost:9000/dashboard?id=MicroAccount
+ceTaskId=AXqdg8O6Lt0wrnmQJC8o
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AXqdg8O6Lt0wrnmQJC8o
