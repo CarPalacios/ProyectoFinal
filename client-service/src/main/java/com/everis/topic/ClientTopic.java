@@ -17,7 +17,7 @@ import org.springframework.kafka.support.serializer.JsonSerializer;
 @Configuration
 public class ClientTopic {
 
-	@Value("${spring.kafka.bootstrap-servers}")
+	@Value("${spring.kafka.bootstrap-server}")
 	private String host;
 
 	/** Creacion del Topico. */
