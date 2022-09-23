@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "20820c68-5e19-4b31-843d-cdf756a7eb88",
-		"name": "customer",
+		"name": "client",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -11,13 +11,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8090/customer",
+					"raw": "localhost:8090/client",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
-						"customer"
+						"client"
 					]
 				}
 			},
@@ -29,13 +29,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:8090/customer/20876543210",
+					"raw": "localhost:8090/client/20876543210",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
-						"customer",
+						"client",
 						"20876543210"
 					]
 				}
@@ -57,13 +57,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8090/customer",
+					"raw": "localhost:8090/client",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
-						"customer"
+						"client"
 					]
 				}
 			},
@@ -84,13 +84,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8090/customer",
+					"raw": "localhost:8090/client",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
-						"customer"
+						"client"
 					]
 				}
 			},
@@ -111,13 +111,13 @@
 					}
 				},
 				"url": {
-					"raw": "localhost:8090/customer/20876543210",
+					"raw": "localhost:8090/client/20876543210",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
-						"customer",
+						"client",
 						"20876543210"
 					]
 				}
@@ -134,13 +134,13 @@
 					"raw": ""
 				},
 				"url": {
-					"raw": "localhost:8090/customer/20876543210",
+					"raw": "localhost:8090/client/20876543210",
 					"host": [
 						"localhost"
 					],
 					"port": "8090",
 					"path": [
-						"customer",
+						"client",
 						"20876543210"
 					]
 				}
