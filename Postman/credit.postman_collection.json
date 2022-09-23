@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "672ff14e-d8da-4369-91a5-e65fddb15a96",
+		"name": "credit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8097/credit",
+					"host": [
+						"localhost"
+					],
+					"port": "8097",
+					"path": [
+						"credit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"amount\" : 1000,\r\n    \"purchase\" : {\r\n        \"cardNumber\" : \"21\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8097/credit",
+					"host": [
+						"localhost"
+					],
+					"port": "8097",
+					"path": [
+						"credit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

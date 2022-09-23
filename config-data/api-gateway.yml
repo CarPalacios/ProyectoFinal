@@ -49,3 +49,7 @@ zuul:
       path: /api/micro-wallet/**
       service-id: micro-wallet
       url: http://localhost:8099/
+    bootcoin:
+      path: /api/micro-bootcoin/**
+      service-id: micro-bootcoin
+      url: http://localhost:8100/

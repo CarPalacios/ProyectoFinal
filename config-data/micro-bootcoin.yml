@@ -1,0 +1,49 @@
+server:
+    port: 8100
+  
+spring:
+  application:
+    name: micro-bootcoin
+  data:
+    mongodb:
+      database: db_bootcoin
+      uri: mongodb://localhost:27017/bootcoin
+  kafka:
+    bootstrap-servers: ${kafka.server.hostname}:${kafka.server.port}
+
+kafka:
+  server:
+    hostname: localhost
+    port: 9092
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+      
+topic:
+  name: bootcoin-topic
+  partitions: 1
+  replicas: 1
+  
+            
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowSize: 10
+        minimumNumberOfCalls: 5
+        permittedNumberOfCallsInHalfOpenState: 3
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        waitDurationInOpenState: 2s
+        failureRateThreshold: 50
+        eventConsumerBufferSize: 10
+        recordExceptions:
+          - org.springframework.web.client.HttpServerErrorException
+          - java.util.concurrent.TimeoutException
+          - java.io.IOException
+          - java.net.ConnectException
+    instances:
+      withdrawalServiceCircuitBreaker:
+        baseConfig: default

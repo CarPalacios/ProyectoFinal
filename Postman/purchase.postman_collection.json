@@ -1,0 +1,325 @@
+{
+	"info": {
+		"_postman_id": "625a0dcb-796f-4b95-a270-92a803779fc0",
+		"name": "purchase",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindAll",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8092/purchase",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByIdentityNumber",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8092/purchase/20876543210",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase",
+						"20876543210"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByAvailableProduct",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8092/purchase/available/87654321",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase",
+						"available",
+						"87654321"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAhorro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": {\r\n        \"productName\": \"AHORRO\",\r\n        \"condition\":{\r\n            \"monthlyTransactionLimit\": 5\r\n        }\r\n    },\r\n    \"customerOwner\": [\r\n        {\r\n            \"identityNumber\" : \"11111112\"\r\n        }\r\n    ],\r\n    \"amountIni\" : 5000,\r\n    \"cardNumber\" : \"2\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8092/purchase",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCuentaCorriente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": {\r\n        \"productName\": \"CUENTA CORRIENTE\",\r\n        \"condition\":{\r\n            \"maintenanceFee\": 12.5\r\n        }\r\n    },\r\n    \"customerOwner\": [\r\n        {\r\n            \"identityNumber\" : \"20876543210\"\r\n        }\r\n    ],\r\n    \"authorizedSigner\": [],\r\n    \"amountIni\" : 500,\r\n    \"cardNumber\" : \"21\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8092/purchase",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePlazoFijo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": {\r\n        \"productName\": \"PLAZO FIJO\",\r\n        \"condition\":{\r\n            \"dailyMonthlyTransactionLimit\": 15\r\n        }\r\n    },\r\n    \"customerOwner\": [\r\n        {\r\n            \"identityNumber\" : \"87654321\"\r\n        }\r\n    ],\r\n    \"amountIni\" : 500,\r\n    \"cardNumber\" : \"12\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8092/purchase",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCreditoPersonal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": {\r\n        \"productName\" : \"CREDITO PERSONAL\"\r\n    },\r\n    \"customerOwner\": [\r\n        {\r\n            \"identityNumber\" : \"87654323\"\r\n        }\r\n    ],\r\n    \"amountIni\" : 15000,\r\n    \"cardNumber\" : \"23\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8092/purchase",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCreditoEmpresarial",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": {\r\n        \"productName\" : \"CREDITO EMPRESARIAL\"\r\n    },\r\n    \"customerOwner\": [\r\n        {\r\n            \"identityNumber\" : \"\"\r\n        }\r\n    ],\r\n    \"authorizedSigner\": [\r\n    ],\r\n    \"amountIni\" : 0,\r\n    \"cardNumber\" : \"\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8092/purchase",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTarjetaCredito",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": {\r\n        \"productName\" : \"TARJETA DE CREDITO\"\r\n    },\r\n    \"customerOwner\": [\r\n        {\r\n            \"identityNumber\" : \"87654321\"\r\n        }\r\n    ],\r\n    \"authorizedSigner\": [\r\n    ],\r\n    \"amountIni\" : 5000,\r\n    \"cardNumber\" : \"21\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8092/purchase",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAhorroVip",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": {\r\n        \"productName\": \"AHORRO VIP\",\r\n        \"condition\":{\r\n            \"monthlyTransactionLimit\": 20\r\n        }\r\n    },\r\n    \"customerOwner\": [\r\n        {\r\n            \"identityNumber\" : \"87654321\"\r\n        }\r\n    ],\r\n    \"amountIni\" : 500,\r\n    \"cardNumber\" : \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8092/purchase",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCuentaCorrientePyme",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"product\": {\r\n        \"productName\": \"CUENTA CORRIENTE PYME\",\r\n        \"condition\":{\r\n            \"maintenanceFee\": 0\r\n        }\r\n    },\r\n    \"customerOwner\": [\r\n        {\r\n            \"identityNumber\" : \"20876543210\"\r\n        }\r\n    ],\r\n    \"authorizedSigner\": [],\r\n    \"amountIni\" : 500,\r\n    \"cardNumber\" : \"13\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8092/purchase",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8092/purchase/21",
+					"host": [
+						"localhost"
+					],
+					"port": "8092",
+					"path": [
+						"purchase",
+						"21"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

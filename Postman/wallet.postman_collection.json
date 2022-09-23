@@ -1,0 +1,82 @@
+{
+	"info": {
+		"_postman_id": "6523b766-69a0-4d64-861f-d48861c8938c",
+		"name": "wallet",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8099/wallet",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"wallet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"MANUEL\",\r\n    \"identityType\" : \"DNI\",\r\n    \"identityNumber\" : \"11111112\",\r\n    \"phoneNumber\" : \"999999998\",\r\n    \"purchase\" : {\r\n        \"cardNumber\" : \"2\" \r\n    },\r\n    \"imei\" : \"282\",\r\n    \"email\" : \"MANUEL@EVERIS.COM\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/wallet",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"wallet"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTransfer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sendWallet\": {\r\n        \"phoneNumber\" : \"999999999\"\r\n    },\r\n    \"receiveWallet\": {\r\n        \"phoneNumber\" : \"999999998\"\r\n    },\r\n    \"amount\" : 1000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8099/wallet/transfer",
+					"host": [
+						"localhost"
+					],
+					"port": "8099",
+					"path": [
+						"wallet",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

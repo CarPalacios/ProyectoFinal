@@ -1,0 +1,113 @@
+{
+	"info": {
+		"_postman_id": "baae64cb-913c-4c88-8c43-4aac5f941157",
+		"name": "transaction",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8093/transaction",
+					"host": [
+						"localhost"
+					],
+					"port": "8093",
+					"path": [
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByCardNumber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8093/transaction/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8093",
+					"path": [
+						"transaction",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindTop10ByCardNumber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8093/transaction/list10/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8093",
+					"path": [
+						"transaction",
+						"list10",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByCommission",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8093/transaction/commission/11",
+					"host": [
+						"localhost"
+					],
+					"port": "8093",
+					"path": [
+						"transaction",
+						"commission",
+						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTransfer",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"sendAccount\": {\r\n        \"accountNumber\" : \"193-159732159-61\"\r\n    },\r\n    \"receiveAccount\": {\r\n        \"accountNumber\" : \"193-159732159-62\"\r\n    },\r\n    \"amount\" : 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8093/transaction",
+					"host": [
+						"localhost"
+					],
+					"port": "8093",
+					"path": [
+						"transaction"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

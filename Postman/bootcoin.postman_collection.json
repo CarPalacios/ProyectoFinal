@@ -1,0 +1,232 @@
+{
+	"info": {
+		"_postman_id": "37b2e856-17e3-4931-b7dd-d70f34fc2865",
+		"name": "bootcoin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindAllCoin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8100/coin",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"coin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateWalletCoin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"MANUEL\",\r\n    \"identityType\" : \"DNI\",\r\n    \"identityNumber\" : \"11111112\",\r\n    \"phoneNumber\" : \"999999998\",\r\n    \"email\" : \"MANUEL@EVERIS.COM\" \r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8100/coin",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"coin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindAllRequest",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8100/coin/request",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"coin",
+						"request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateRequestYanki",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payMode\" : \"YANKI\",\r\n    \"number\" : \"999999998\",\r\n    \"amount\" : \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8100/coin/request",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"coin",
+						"request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateRequestTransferencia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payMode\" : \"TRANSFERENCIA\",\r\n    \"number\" : \"190-10101010-02\",\r\n    \"amount\" : \"100\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8100/coin/request",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"coin",
+						"request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindAllExchangeRate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8100/coin/rate",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"coin",
+						"rate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateExchangeRate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"saleCoin\" : 4.05,\r\n    \"buyCoin\" : 3.75\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8100/coin/rate",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"coin",
+						"rate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTransferTransferencia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payMode\" : \"TRANSFERENCIA\",\r\n    \"sendNumber\" : \"190-10101010-01\",\r\n    \"receiveNumber\" : \"190-10101010-02\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8100/coin/transfer",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"coin",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTransferYanki",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"payMode\" : \"YANKI\",\r\n    \"sendNumber\" : \"999999999\",\r\n    \"receiveNumber\" : \"999999998\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8100/coin/transfer",
+					"host": [
+						"localhost"
+					],
+					"port": "8100",
+					"path": [
+						"coin",
+						"transfer"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "f9658ade-1b39-44bd-b976-feff80dbc2f5",
+		"name": "deposit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8096/deposit",
+					"host": [
+						"localhost"
+					],
+					"port": "8096",
+					"path": [
+						"deposit"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"account\": {\r\n        \"accountNumber\" : \"190-10101010-01\"\r\n    },\r\n    \"amount\" : 1500,\r\n    \"purchase\" : {\r\n        \"cardNumber\" : \"1\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8096/deposit",
+					"host": [
+						"localhost"
+					],
+					"port": "8096",
+					"path": [
+						"deposit"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

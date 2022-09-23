@@ -1,0 +1,151 @@
+{
+	"info": {
+		"_postman_id": "20820c68-5e19-4b31-843d-cdf756a7eb88",
+		"name": "customer",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/customer",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByIndentityNumber",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8090/customer/20876543210",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer",
+						"20876543210"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePersonal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"MANUEL\",\r\n    \"identityType\" : \"DNI\",\r\n    \"identityNumber\" : \"11111112\",\r\n    \"customerType\" : \"PERSONAL\",\r\n    \"address\" : \"PERU\",\r\n    \"phoneNumber\" : \"999999998\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/customer",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateEmpresarial",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\" : \"EVERIS\",\r\n    \"identityType\" : \"RUC\",\r\n    \"identityNumber\" : \"2222222223\",\r\n    \"customerType\" : \"EMPRESARIAL\",\r\n    \"address\" : \"PERU\",\r\n    \"phoneNumber\" : \"999999996\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/customer",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "UpdateByIdentityNumber",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"EVERIS\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8090/customer/20876543210",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer",
+						"20876543210"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "localhost:8090/customer/20876543210",
+					"host": [
+						"localhost"
+					],
+					"port": "8090",
+					"path": [
+						"customer",
+						"20876543210"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

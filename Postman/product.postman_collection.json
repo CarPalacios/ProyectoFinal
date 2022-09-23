@@ -1,0 +1,318 @@
+{
+	"info": {
+		"_postman_id": "d0757702-80ed-4445-9bbc-efbfbb20cfc3",
+		"name": "product",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8091/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "FindByProductName",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8091/product/AHORRO",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product",
+						"AHORRO"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAhorro",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productName\": \"AHORRO\",\r\n    \"productType\": \"PASIVO\",\r\n    \"condition\":{\r\n        \"customerTypeTarget\": [\r\n            \"PERSONAL\"\r\n        ],\r\n        \"hasMaintenanceFee\": false,\r\n        \"maintenanceFee\": 0.0,\r\n        \"hasMonthlyTransactionLimit\": true,\r\n        \"monthlyTransactionLimit\": 0,\r\n        \"hasDailyMonthlyTransactionLimit\": false,\r\n        \"dailyMonthlyTransactionLimit\": 0,\r\n        \"productPerPersonLimit\": 1,\r\n        \"productPerBusinessLimit\": 0\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCuentaCorriente",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productName\":\"CUENTA CORRIENTE\",\r\n    \"productType\":\"PASIVO\",\r\n    \"condition\":{\r\n        \"customerTypeTarget\":[\r\n            \"PERSONAL\",\r\n            \"EMPRESARIAL\"\r\n        ],\r\n        \"hasMaintenanceFee\":true,\r\n        \"maintenanceFee\":0.0,\r\n        \"hasMonthlyTransactionLimit\":false,\r\n        \"monthlyTransactionLimit\":0,\r\n        \"hasDailyMonthlyTransactionLimit\": false,\r\n        \"dailyMonthlyTransactionLimit\": 0,\r\n        \"productPerPersonLimit\":1,\r\n        \"productPerBusinessLimit\":9999999\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreatePlazoFijo",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"productName\":\"PLAZO FIJO\",\r\n    \"productType\":\"PASIVO\",\r\n    \"condition\":{\r\n        \"customerTypeTarget\":[\r\n            \"PERSONAL\"\r\n        ],\r\n        \"hasMaintenanceFee\":false,\r\n        \"maintenanceFee\":0.0,\r\n        \"hasMonthlyTransactionLimit\":true,\r\n        \"monthlyTransactionLimit\":1,\r\n        \"hasDailyMonthlyTransactionLimit\": true,\r\n        \"dailyMonthlyTransactionLimit\": 0,\r\n        \"productPerPersonLimit\":1,\r\n        \"productPerBusinessLimit\":0\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCreditoPersonal",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"productName\":\"CREDITO PERSONAL\",\r\n    \"productType\":\"ACTIVO\",\r\n    \"condition\":{\r\n        \"customerTypeTarget\":[\r\n            \"PERSONAL\"\r\n        ],\r\n        \"hasMaintenanceFee\":false,\r\n        \"maintenanceFee\":0.0,\r\n        \"hasMonthlyTransactionLimit\":false,\r\n        \"monthlyTransactionLimit\":0,\r\n        \"hasDailyMonthlyTransactionLimit\": false,\r\n        \"dailyMonthlyTransactionLimit\": 0,\r\n        \"productPerPersonLimit\":1,\r\n        \"productPerBusinessLimit\":0\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCreditoEmpresarial",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"productName\":\"CREDITO EMPRESARIAL\",\r\n    \"productType\":\"ACTIVO\",\r\n    \"condition\":{\r\n        \"customerTypeTarget\":[\r\n            \"EMPRESARIAL\"\r\n        ],\r\n        \"hasMaintenanceFee\":false,\r\n        \"maintenanceFee\":0.0,\r\n        \"hasMonthlyTransactionLimit\":false,\r\n        \"monthlyTransactionLimit\":0,\r\n        \"hasDailyMonthlyTransactionLimit\": false,\r\n        \"dailyMonthlyTransactionLimit\": 0,\r\n        \"productPerPersonLimit\":0,\r\n        \"productPerBusinessLimit\":1\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateTarjetaCredito",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"productName\":\"TARJETA DE CREDITO\",\r\n    \"productType\":\"ACTIVO\",\r\n    \"condition\":{\r\n        \"customerTypeTarget\":[\r\n            \"PERSONAL\",\r\n            \"EMPRESARIAL\"\r\n        ],\r\n        \"hasMaintenanceFee\":false,\r\n        \"maintenanceFee\":0.0,\r\n        \"hasMonthlyTransactionLimit\":false,\r\n        \"monthlyTransactionLimit\":0,\r\n        \"hasDailyMonthlyTransactionLimit\": false,\r\n        \"dailyMonthlyTransactionLimit\": 0,\r\n        \"productPerPersonLimit\":9999999,\r\n        \"productPerBusinessLimit\":9999999\r\n    }\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateAhorroVip",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productName\": \"AHORRO VIP\",\r\n    \"productType\": \"PASIVO\",\r\n    \"condition\":{\r\n        \"customerTypeTarget\": [\r\n            \"PERSONAL\"\r\n        ],\r\n        \"hasMaintenanceFee\": false,\r\n        \"maintenanceFee\": 0.0,\r\n        \"hasMonthlyTransactionLimit\": true,\r\n        \"monthlyTransactionLimit\": 0,\r\n        \"hasDailyMonthlyTransactionLimit\": false,\r\n        \"dailyMonthlyTransactionLimit\": 0,\r\n        \"productPerPersonLimit\": 1,\r\n        \"productPerBusinessLimit\": 0\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "CreateCuentaCorrientePyme",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productName\":\"CUENTA CORRIENTE PYME\",\r\n    \"productType\":\"PASIVO\",\r\n    \"condition\":{\r\n        \"customerTypeTarget\":[\r\n            \"EMPRESARIAL\"\r\n        ],\r\n        \"hasMaintenanceFee\":false,\r\n        \"maintenanceFee\":0.0,\r\n        \"hasMonthlyTransactionLimit\":false,\r\n        \"monthlyTransactionLimit\":0,\r\n        \"hasDailyMonthlyTransactionLimit\": false,\r\n        \"dailyMonthlyTransactionLimit\": 0,\r\n        \"productPerPersonLimit\":0,\r\n        \"productPerBusinessLimit\":9999999\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/product",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"condition\": {\r\n        \"customerTypeTarget\": [\r\n            \"PERSONAL\"\r\n        ],\r\n        \"hasMaintenanceFee\": true,\r\n        \"hasMonthlyTransactionLimit\": true,\r\n        \"hasDailyMonthlyTransactionLimit\": false,\r\n        \"productPerPersonLimit\": 1,\r\n        \"productPerBusinessLimit\": 0\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/product/AHORRO",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product",
+						"AHORRO"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8091/product/CUENTA CORRIENTE",
+					"host": [
+						"localhost"
+					],
+					"port": "8091",
+					"path": [
+						"product",
+						"CUENTA CORRIENTE"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

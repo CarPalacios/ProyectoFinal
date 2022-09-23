@@ -1,0 +1,54 @@
+{
+	"info": {
+		"_postman_id": "555479c4-fe19-44b2-b72e-935e62d8346d",
+		"name": "withdrawal",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "FindAll",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8095/withdrawal",
+					"host": [
+						"localhost"
+					],
+					"port": "8095",
+					"path": [
+						"withdrawal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"account\": {\r\n        \"accountNumber\" : \"190-10101010-02\"\r\n    },\r\n    \"amount\" : 200,\r\n    \"purchase\" : {\r\n        \"cardNumber\" : \"2\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8095/withdrawal",
+					"host": [
+						"localhost"
+					],
+					"port": "8095",
+					"path": [
+						"withdrawal"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
