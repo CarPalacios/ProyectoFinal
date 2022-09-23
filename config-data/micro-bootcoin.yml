@@ -31,6 +31,17 @@ msg:
     registro:
       notfound.all: MONEDEROS NO ENCONTRADOS
       if.exists: MONEDERO YA REGISTRADO
+      rate.notfound.all:
+      request.notfound.all:
+      notfound:
+      request.if.exists:
+      phoneini.exists:
+      phonefin.exists:
+      accountini.exists:
+      accountfin.exists:
+      request.exists:
+      positive:
+      exceed:
             
 resilience4j:
   circuitbreaker:
