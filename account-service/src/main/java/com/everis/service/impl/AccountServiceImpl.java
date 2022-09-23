@@ -7,6 +7,8 @@ import com.everis.repository.InterfaceAccountRepository;
 import com.everis.repository.InterfaceRepository;
 import com.everis.service.InterfaceAccountService;
 import com.everis.service.InterfacePurchaseService;
+import com.everis.topic.producer.AccountProducer;
+
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -35,6 +37,9 @@ public class AccountServiceImpl extends CrudServiceImpl<Account, String>
 
   @Autowired
   private InterfacePurchaseService purchaseService;
+  
+  @Autowired
+  private AccountProducer producer;
 
   @Override
   protected InterfaceRepository<Account, String> getRepository() {
@@ -92,31 +97,38 @@ public class AccountServiceImpl extends CrudServiceImpl<Account, String>
                   ?
                       Mono.error(new RuntimeException("CUENTA YA EXISTENTE"))
                   :
-                      service.create(account)
+                      service.create(account).map(createdObject -> {
+                    	  producer.sendCreatedAccount(createdObject);
+                    	  return createdObject; 
+                      })
+                      .switchIfEmpty(Mono.error(new RuntimeException("CUENTA NO SE PUDO CREAR")))
               );
 
         });
 
   }
 
-  @Override
-  @CircuitBreaker(name = CIRCUIT, fallbackMethod = "updateFallback")
-  public Mono<Account> updateAccount(Account account, String accountNumber) {
+	@Override
+	@CircuitBreaker(name = CIRCUIT, fallbackMethod = "updateFallback")
+	public Mono<Account> updateAccount(Account account, String accountNumber) {
 
-    Mono<Account> accountModification = Mono.just(account);
+		Mono<Account> accountModification = Mono.just(account);
 
-    Mono<Account> accountDatabase = findByAccountNumber(accountNumber);
+		Mono<Account> accountDatabase = findByAccountNumber(accountNumber);
 
-    return accountDatabase
-        .zipWith(accountModification, (a, b) -> {
+		return accountDatabase.zipWith(accountModification, (a, b) -> {
 
-          a.setAccountNumber(b.getAccountNumber());
-          return a;
+			a.setAccountNumber(b.getAccountNumber());
+			return a;
 
-        })
-        .flatMap(service::update);
+		}).flatMap(service::update).map(objectUpdated -> {
 
-  }
+			producer.sendCreatedAccount(objectUpdated);
+			return objectUpdated;
+
+		}).switchIfEmpty(Mono.error(new RuntimeException("CUENTA NO IDENTIFICADA PARA ACTUALIZAR")));
+
+	}
 
   @Override
   @CircuitBreaker(name = CIRCUIT, fallbackMethod = "deleteFallback")

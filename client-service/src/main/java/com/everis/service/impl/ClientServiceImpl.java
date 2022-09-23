@@ -5,6 +5,8 @@ import com.everis.model.Client;
 import com.everis.repository.InterfaceClientRepository;
 import com.everis.repository.InterfaceRepository;
 import com.everis.service.InterfaceClientService;
+import com.everis.topic.producer.ClientProducer;
+
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,167 +21,159 @@ import reactor.core.publisher.Mono;
  */
 @Slf4j
 @Service
-public class ClientServiceImpl extends CrudServiceImpl<Client, String>
-    implements InterfaceClientService {
+public class ClientServiceImpl extends CrudServiceImpl<Client, String> implements InterfaceClientService {
 
-  static final String CIRCUIT = "clientServiceCircuitBreaker";
+	static final String CIRCUIT = "clientServiceCircuitBreaker";
 
-  @Autowired
-  private InterfaceClientRepository repository;
+	@Autowired
+	private InterfaceClientRepository repository;
 
-  @Autowired
-  private InterfaceClientService service;
+	@Autowired
+	private InterfaceClientService service;
 
-  @Override
-  protected InterfaceRepository<Client, String> getRepository() {
+	@Autowired
+	private ClientProducer producer;
 
-    return repository;
+	@Override
+	protected InterfaceRepository<Client, String> getRepository() {
 
-  }
+		return repository;
 
-  @Override
-  @CircuitBreaker(name = CIRCUIT, fallbackMethod = "findAllFallback")
-  public Mono<List<Client>> findAllClient() {
+	}
 
-    Flux<Client> clientDatabase = service.findAll()
-        .switchIfEmpty(Mono.error(new Throwable("No hay clientes registrados")));
+	@Override
+	@CircuitBreaker(name = CIRCUIT, fallbackMethod = "findAllFallback")
+	public Mono<List<Client>> findAllClient() {
 
-    return clientDatabase.collectList().flatMap(Mono::just);
+		Flux<Client> clientDatabase = service.findAll()
+				.switchIfEmpty(Mono.error(new Throwable("No hay clientes registrados")));
 
-  }
+		return clientDatabase.collectList().flatMap(Mono::just);
 
-  @Override
-  @CircuitBreaker(name = CIRCUIT, fallbackMethod = "clientFallback")
-  public Mono<Client> findByIdentityNumber(String identityNumber) {
+	}
 
-    return repository.findByIdentityNumber(identityNumber)
-        .switchIfEmpty(Mono.error(new Throwable("DNI no encontrado")));
+	@Override
+	@CircuitBreaker(name = CIRCUIT, fallbackMethod = "clientFallback")
+	public Mono<Client> findByIdentityNumber(String identityNumber) {
 
-  }
+		return repository.findByIdentityNumber(identityNumber)
+				.switchIfEmpty(Mono.error(new Throwable("DNI no encontrado")));
 
-  @Override
-  @CircuitBreaker(name = CIRCUIT, fallbackMethod = "createFallback")
-  public Mono<Client> createClient(Client client) {
+	}
 
-    Flux<Client> clientDatabase = service.findAll()
-        .filter(list -> list.getIdentityNumber().equals(client.getIdentityNumber()));
+	@Override
+	@CircuitBreaker(name = CIRCUIT, fallbackMethod = "createFallback")
+	public Mono<Client> createClient(Client client) {
 
-    return clientDatabase
-        .collectList()
-        .flatMap(list -> {
+		Flux<Client> clientDatabase = service.findAll()
+				.filter(list -> list.getIdentityNumber().equals(client.getIdentityNumber()));
 
-          if (list.size() > 0) {
+		return clientDatabase.collectList().flatMap(list -> {
 
-            return Mono.error(new Throwable("El cliente ya existe"));
+			if (list.size() > 0) {
 
-          }
-          
-          return repository.save(client);
+				return Mono.error(new RuntimeException("CLIENTE YA EXISTE"));
 
-        });
+			}
 
-  }
+			return service.create(client).map(createdObject -> {
 
-  @Override
-  @CircuitBreaker(name = CIRCUIT, fallbackMethod = "updateFallback")
-  public Mono<Client> updateClient(Client client, String identityNumber) {
+				producer.sendSavedCustomerTopic(client);
+				return createdObject;
 
-    Mono<Client> clientModification = Mono.just(client);
+			}).switchIfEmpty(Mono.error(new RuntimeException("CLIENTE NO SE PUDO CREAR")));
 
-    Mono<Client> clientDatabase = repository.findByIdentityNumber(identityNumber);
+		});
 
-    return clientDatabase
-        .zipWith(clientModification, (a, b) -> {
+	}
 
-          if (b.getName() != null) a.setName(b.getName());
-          if (b.getAddress() != null) a.setAddress(b.getAddress());
-          if (b.getPhoneNumber() != null) a.setPhoneNumber(b.getPhoneNumber());
+	@Override
+	@CircuitBreaker(name = CIRCUIT, fallbackMethod = "updateFallback")
+	public Mono<Client> updateClient(Client client, String identityNumber) {
 
-          return a;
-        });
-  }
+		Mono<Client> clientModification = Mono.just(client);
 
-  @Override
-  @CircuitBreaker(name = CIRCUIT, fallbackMethod = "deleteFallback")
-  public Mono<Response> deleteClient(String identityNumber) {
+		Mono<Client> clientDatabase = repository.findByIdentityNumber(identityNumber);
 
-    Mono<Client> clientDatabase = repository.findByIdentityNumber(identityNumber);
+		return clientDatabase.zipWith(clientModification, (a, b) -> {
 
-    return clientDatabase
-        .flatMap(objectDelete -> service.delete(objectDelete.getId())
-            .then(Mono.just(Response.builder().data("Cliente Eliminado").build())))
-        .switchIfEmpty(Mono.error(new RuntimeException("Cliente no identificado para eliminar")));
+			if (b.getName() != null)
+				a.setName(b.getName());
+			if (b.getAddress() != null)
+				a.setAddress(b.getAddress());
+			if (b.getPhoneNumber() != null)
+				a.setPhoneNumber(b.getPhoneNumber());
 
-  }
+			return a;
 
-  /** Mensaje si no existen clientes. */
-  public Mono<List<Client>> findAllFallback(Exception ex) {
+		}).flatMap(service::update).map(objectUpdated -> {
 
-    log.info("Clients not found, returning fallback");
+			producer.sendSavedCustomerTopic(objectUpdated);
+			return objectUpdated;
 
-    List<Client> list = new ArrayList<>();
+		}).switchIfEmpty(Mono.error(new RuntimeException("CLIENTE NO IDENTIFICADO PARA ACTUALIZAR")));
+	}
 
-    list.add(Client
-        .builder()
-        .name(ex.getMessage())
-        .build());
+	@Override
+	@CircuitBreaker(name = CIRCUIT, fallbackMethod = "deleteFallback")
+	public Mono<Response> deleteClient(String identityNumber) {
 
-    return Mono.just(list);
+		Mono<Client> clientDatabase = repository.findByIdentityNumber(identityNumber);
 
-  }
+		return clientDatabase
+				.flatMap(objectDelete -> service.delete(objectDelete.getId())
+						.then(Mono.just(Response.builder().data("Cliente Eliminado").build())))
+				.switchIfEmpty(Mono.error(new RuntimeException("Cliente no identificado para eliminar")));
 
-  /** Mensaje si no encuentra el cliente. */
-  public Mono<Client> clientFallback(String identityNumber, Exception ex) {
+	}
 
-    log.info("Client with identity number {} not found.", identityNumber);
+	/** Mensaje si no existen clientes. */
+	public Mono<List<Client>> findAllFallback(Exception ex) {
 
-    return Mono.just(Client
-        .builder()
-        .identityNumber(identityNumber)
-        .name(ex.getMessage())
-        .build());
+		log.info("Clients not found, returning fallback");
 
-  }
+		List<Client> list = new ArrayList<>();
 
-  /** Mensaje si falla el create. */
-  public Mono<Client> createFallback(Client client, Exception ex) {
+		list.add(Client.builder().name(ex.getMessage()).build());
 
-    log.info("Client with identity number {} could not be created.", client.getIdentityNumber());
+		return Mono.just(list);
 
-    return Mono.just(Client
-        .builder()
-        .identityNumber(client.getIdentityNumber())
-        .name(ex.getMessage())
-        .build());
+	}
 
-  }
+	/** Mensaje si no encuentra el cliente. */
+	public Mono<Client> clientFallback(String identityNumber, Exception ex) {
 
-  /** Mensaje si falla el update. */
-  public Mono<Client> updateFallback(Client client,
-      String identityNumber, Exception ex) {
+		log.info("Client with identity number {} not found.", identityNumber);
 
-    log.info("Client with identity number {} not found to update.",
-    		client.getIdentityNumber());
+		return Mono.just(Client.builder().identityNumber(identityNumber).name(ex.getMessage()).build());
 
-    return Mono.just(Client
-        .builder()
-        .identityNumber(identityNumber)
-        .name(ex.getMessage())
-        .build());
+	}
 
-  }
+	/** Mensaje si falla el create. */
+	public Mono<Client> createFallback(Client client, Exception ex) {
 
-  /** Mensaje si falla el delete. */
-  public Mono<Response> deleteFallback(String identityNumber, Exception ex) {
+		log.info("Client with identity number {} could not be created.", client.getIdentityNumber());
 
-    log.info("Client with identity number {} not found to delete.", identityNumber);
+		return Mono.just(Client.builder().identityNumber(client.getIdentityNumber()).name(ex.getMessage()).build());
 
-    return Mono.just(Response
-        .builder()
-        .data(identityNumber)
-        .error(ex.getMessage())
-        .build());
+	}
 
-  }
+	/** Mensaje si falla el update. */
+	public Mono<Client> updateFallback(Client client, String identityNumber, Exception ex) {
+
+		log.info("Client with identity number {} not found to update.", client.getIdentityNumber());
+
+		return Mono.just(Client.builder().identityNumber(identityNumber).name(ex.getMessage()).build());
+
+	}
+
+	/** Mensaje si falla el delete. */
+	public Mono<Response> deleteFallback(String identityNumber, Exception ex) {
+
+		log.info("Client with identity number {} not found to delete.", identityNumber);
+
+		return Mono.just(Response.builder().data(identityNumber).error(ex.getMessage()).build());
+
+	}
 
 }

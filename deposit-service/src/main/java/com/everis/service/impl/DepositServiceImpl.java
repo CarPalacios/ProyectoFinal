@@ -8,6 +8,8 @@ import com.everis.repository.InterfaceRepository;
 import com.everis.service.InterfaceAccountService;
 import com.everis.service.InterfaceDepositService;
 import com.everis.service.InterfacePurchaseService;
+import com.everis.topic.producer.DepositProducer;
+
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -39,6 +41,9 @@ public class DepositServiceImpl extends CrudServiceImpl<Deposit, String>
   
   @Autowired
   private InterfaceAccountService accountService;
+  
+  @Autowired
+  private DepositProducer producer;
   
   @Override
   protected InterfaceRepository<Deposit, String> getRepository() {
@@ -84,6 +89,8 @@ public class DepositServiceImpl extends CrudServiceImpl<Deposit, String>
               deposit.setAccount(account);        
               deposit.setPurchase(purchase);
               deposit.setDepositDate(LocalDateTime.now());
+              
+              producer.sendDepositAccountTopic(deposit);
               
               if (purchase.getProduct().getCondition().getMonthlyTransactionLimit() > 0) {
                 
